@@ -986,8 +986,25 @@ spec:
                               TLS must be present and one of the provided SNIs must be indicated in the
                               TLS handshake.
                             items:
+                              description: |-
+                                ServerName allows using prefix only wildcards to match DNS names.
+
+                                - "*" matches 0 or more DNS valid characters, and may occur anywhere in
+                                the pattern. As a special case a "*" as the leftmost character, without a
+                                following "." matches all subdomains as well as the name to the right.
+                                A trailing "." is automatically added when missing.
+
+                                Examples:
+                                  - `*.cilium.io` matches exactly one subdomain of cilium at that level www.cilium.io and blog.cilium.io match, cilium.io and google.com do not.
+                                  - `**.cilium.io` matches more than one subdomain of cilium, e.g. sub1.sub2.cilium.io and sub.cilium.io match, cilium.io do not.
+                                  - `*cilium.io` matches cilium.io and all subdomains ends with "cilium.io" except those containing "." separator, subcilium.io and sub-cilium.io match,
+                                    www.cilium.io and blog.cilium.io does not.
+                              maxLength: 255
+                              pattern: ^([-a-zA-Z0-9_*]+[.]?)+$
                               type: string
+                            minItems: 1
                             type: array
+                            x-kubernetes-list-type: set
                           terminatingTLS:
                             description: |-
                               TerminatingTLS is the TLS context for the connection terminated by
@@ -2822,8 +2839,25 @@ spec:
                               TLS must be present and one of the provided SNIs must be indicated in the
                               TLS handshake.
                             items:
+                              description: |-
+                                ServerName allows using prefix only wildcards to match DNS names.
+
+                                - "*" matches 0 or more DNS valid characters, and may occur anywhere in
+                                the pattern. As a special case a "*" as the leftmost character, without a
+                                following "." matches all subdomains as well as the name to the right.
+                                A trailing "." is automatically added when missing.
+
+                                Examples:
+                                  - `*.cilium.io` matches exactly one subdomain of cilium at that level www.cilium.io and blog.cilium.io match, cilium.io and google.com do not.
+                                  - `**.cilium.io` matches more than one subdomain of cilium, e.g. sub1.sub2.cilium.io and sub.cilium.io match, cilium.io do not.
+                                  - `*cilium.io` matches cilium.io and all subdomains ends with "cilium.io" except those containing "." separator, subcilium.io and sub-cilium.io match,
+                                    www.cilium.io and blog.cilium.io does not.
+                              maxLength: 255
+                              pattern: ^([-a-zA-Z0-9_*]+[.]?)+$
                               type: string
+                            minItems: 1
                             type: array
+                            x-kubernetes-list-type: set
                           terminatingTLS:
                             description: |-
                               TerminatingTLS is the TLS context for the connection terminated by
@@ -4445,8 +4479,25 @@ spec:
                                 TLS must be present and one of the provided SNIs must be indicated in the
                                 TLS handshake.
                               items:
+                                description: |-
+                                  ServerName allows using prefix only wildcards to match DNS names.
+
+                                  - "*" matches 0 or more DNS valid characters, and may occur anywhere in
+                                  the pattern. As a special case a "*" as the leftmost character, without a
+                                  following "." matches all subdomains as well as the name to the right.
+                                  A trailing "." is automatically added when missing.
+
+                                  Examples:
+                                    - `*.cilium.io` matches exactly one subdomain of cilium at that level www.cilium.io and blog.cilium.io match, cilium.io and google.com do not.
+                                    - `**.cilium.io` matches more than one subdomain of cilium, e.g. sub1.sub2.cilium.io and sub.cilium.io match, cilium.io do not.
+                                    - `*cilium.io` matches cilium.io and all subdomains ends with "cilium.io" except those containing "." separator, subcilium.io and sub-cilium.io match,
+                                      www.cilium.io and blog.cilium.io does not.
+                                maxLength: 255
+                                pattern: ^([-a-zA-Z0-9_*]+[.]?)+$
                                 type: string
+                              minItems: 1
                               type: array
+                              x-kubernetes-list-type: set
                             terminatingTLS:
                               description: |-
                                 TerminatingTLS is the TLS context for the connection terminated by
@@ -6283,8 +6334,25 @@ spec:
                                 TLS must be present and one of the provided SNIs must be indicated in the
                                 TLS handshake.
                               items:
+                                description: |-
+                                  ServerName allows using prefix only wildcards to match DNS names.
+
+                                  - "*" matches 0 or more DNS valid characters, and may occur anywhere in
+                                  the pattern. As a special case a "*" as the leftmost character, without a
+                                  following "." matches all subdomains as well as the name to the right.
+                                  A trailing "." is automatically added when missing.
+
+                                  Examples:
+                                    - `*.cilium.io` matches exactly one subdomain of cilium at that level www.cilium.io and blog.cilium.io match, cilium.io and google.com do not.
+                                    - `**.cilium.io` matches more than one subdomain of cilium, e.g. sub1.sub2.cilium.io and sub.cilium.io match, cilium.io do not.
+                                    - `*cilium.io` matches cilium.io and all subdomains ends with "cilium.io" except those containing "." separator, subcilium.io and sub-cilium.io match,
+                                      www.cilium.io and blog.cilium.io does not.
+                                maxLength: 255
+                                pattern: ^([-a-zA-Z0-9_*]+[.]?)+$
                                 type: string
+                              minItems: 1
                               type: array
+                              x-kubernetes-list-type: set
                             terminatingTLS:
                               description: |-
                                 TerminatingTLS is the TLS context for the connection terminated by
