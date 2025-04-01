@@ -10,6 +10,8 @@ static __always_inline bool identity_in_range(__u32 identity, __u32 range_start,
 	return range_start <= identity && identity <= range_end;
 }
 
+#define SECCTX_FROM_IPCACHE_OK	2
+
 #define IDENTITY_LOCAL_SCOPE_MASK 0xFF000000
 #define IDENTITY_LOCAL_SCOPE_REMOTE_NODE 0x02000000
 
@@ -224,4 +226,13 @@ static __always_inline __u32 inherit_identity_from_host(struct __ctx_buff *ctx, 
 static __always_inline bool identity_is_local(__u32 identity)
 {
 	return (identity & IDENTITY_LOCAL_SCOPE_MASK) != 0;
+}
+
+static __always_inline bool identity_from_ipcache_ok(void)
+{
+#if defined(SECCTX_FROM_IPCACHE) && (defined(ENABLE_IPV4) || defined(ENABLE_IPV6))
+	return SECCTX_FROM_IPCACHE == SECCTX_FROM_IPCACHE_OK;
+#else
+	return false;
+#endif
 }

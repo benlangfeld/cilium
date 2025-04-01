@@ -16,3 +16,6 @@
 #include <node_config.h>
 
 NODE_CONFIG(union v6addr, router_ipv6, "Internal IPv6 router address assigned to the cilium_host interface")
+
+NODE_CONFIG(__u32, host_secctx_from_ipcache, "Pull security context from IP cache")
+#define SECCTX_FROM_IPCACHE CONFIG(host_secctx_from_ipcache)

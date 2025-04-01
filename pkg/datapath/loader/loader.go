@@ -188,11 +188,6 @@ func netdevRewrites(ep datapath.EndpointConfiguration, lnc *datapath.LocalNodeCo
 		cfg.EthHeaderLength = 0
 	}
 
-	cfg.HostSecctxFromIPCache = secctxFromIpcacheEnabled
-	if option.Config.EnableHostLegacyRouting {
-		cfg.HostSecctxFromIPCache = secctxFromIpcacheDisabled
-	}
-
 	cfg.SecurityLabel = ep.GetIdentity().Uint32()
 
 	ifindex := link.Attrs().Index
@@ -409,11 +404,6 @@ func ciliumNetRewrites(ep datapath.EndpointConfiguration, lnc *datapath.LocalNod
 	}
 	cfg.InterfaceMAC = em.As8()
 
-	cfg.HostSecctxFromIPCache = secctxFromIpcacheEnabled
-	if option.Config.EnableHostLegacyRouting {
-		cfg.HostSecctxFromIPCache = secctxFromIpcacheDisabled
-	}
-
 	ifindex := link.Attrs().Index
 	cfg.InterfaceIfindex = uint32(ifindex)
 
@@ -573,6 +563,8 @@ func endpointRewrites(ep datapath.EndpointConfiguration, lnc *datapath.LocalNode
 
 	cfg.InterfaceIfindex = uint32(ep.GetIfIndex())
 
+	cfg.HostSecctxFromIPCache = secctxFromIpcacheDisabled
+
 	cfg.EndpointID = uint16(ep.GetID())
 	cfg.EndpointNetNSCookie = ep.GetEndpointNetNsCookie()
 
@@ -685,6 +677,8 @@ func replaceOverlayDatapath(ctx context.Context, lnc *datapath.LocalNodeConfigur
 
 	cfg := config.NewBPFOverlay(nodeConfig(lnc))
 	cfg.InterfaceIfindex = uint32(device.Attrs().Index)
+
+	cfg.HostSecctxFromIPCache = secctxFromIpcacheDisabled
 
 	var obj overlayObjects
 	commit, err := bpf.LoadAndAssign(&obj, spec, &bpf.CollectionOptions{

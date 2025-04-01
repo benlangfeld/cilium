@@ -83,12 +83,6 @@ static __always_inline int rewrite_dmac_to_host(struct __ctx_buff *ctx)
 
 	return CTX_ACT_OK;
 }
-
-#define SECCTX_FROM_IPCACHE_OK	2
-static __always_inline bool identity_from_ipcache_ok(void)
-{
-	return SECCTX_FROM_IPCACHE == SECCTX_FROM_IPCACHE_OK;
-}
 #endif
 
 #ifdef ENABLE_IPV6

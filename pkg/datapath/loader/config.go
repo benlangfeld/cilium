@@ -16,5 +16,10 @@ func nodeConfig(lnc *datapath.LocalNodeConfiguration) config.Node {
 		node.RouterIPv6 = ([16]byte)(lnc.CiliumInternalIPv6)
 	}
 
+	node.HostSecctxFromIPCache = secctxFromIpcacheEnabled
+	if option.Config.EnableHostLegacyRouting {
+		node.HostSecctxFromIPCache = secctxFromIpcacheDisabled
+	}
+
 	return node
 }
