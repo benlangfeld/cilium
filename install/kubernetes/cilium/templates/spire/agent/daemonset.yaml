@@ -80,7 +80,6 @@ spec:
               mountPath: /run/spire/bundle
             - name: spire-agent-socket
               mountPath: /run/spire/sockets
-              readOnly: false
             - name: spire-agent
               mountPath: /var/run/secrets/tokens
           env:
